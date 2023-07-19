@@ -1,0 +1,22 @@
+body {
+  padding: 2px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+nav input:focus{
+  border:none;
+  outline: none;
+}
+.bg-search-button{
+
+  background-color: #002a3a !important;
+
+
+}
+.category li:hover{
+   background-color:goldenrod;
+   border-radius: 20%;
+}
