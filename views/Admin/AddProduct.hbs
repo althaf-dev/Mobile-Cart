@@ -1,0 +1,64 @@
+<section class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 offset-lg-4  ">
+            <h4>ADD PRODUCTS</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 offset-lg-3 p-4">
+            <form class="form-control p-2 m-lg-3" action="/admin/add-product" method="post" enctype="multipart/form-data">
+
+                <div class=" row mt-4 me-1">
+                    <div class="col-sm-6 col-12 d-flex justify-content-center"><label class = "form-control border-0" for="#product_id">Product ID</label></div>
+                    <div class="col-sm-6 col-12 "><input class = "form-control"  type="text" placeholder="Product ID" name="product_id" id="product_id"></div>
+                    
+                    
+                </div>
+
+                <div class=" row mt-4 me-1">
+                    <div class="col-sm-6 col-12 d-flex justify-content-center"><label class = "form-control border-0" for="#product_name">Product Name</label></div>
+                    <div class="col-sm-6  col-12" ><input class = "form-control" type="text" placeholder="Product Name" name="product_name" id="product_name"></div>
+                    
+                </div>
+
+                <div class="row mt-4 me-1">
+                    <div class="col-sm-6 col-12 d-flex justify-content-center"><label class = "form-control border-0" for="#product_price">Price</label></div>
+                    <div class="col-sm-6 col-12 "><input class = "form-control" type="text" placeholder="Product Price" name="product_price" id="product_price"></div>
+                </div>
+
+                <div class="row mt-4 me-1">
+                    <div class="col-sm-6 col-12 d-flex justify-content-center">  <label class = "form-control border-0" for="#product_brand">Brand</label></div>
+                    <div class="col-sm-6 col-12" ><input class = "form-control" type="text" placeholder="Product Brand" name="product_brand" id="product_brand"></div>
+                </div>
+
+                <div class="row mt-4 me-1">
+                    <div class="col-sm-6 col-12 d-flex justify-content-center">  <label class = "form-control border-0" for="#product_stkqty">Stock</label></div>
+                    <div class="col-sm-6 col-12" ><input class = "form-control" type="text" placeholder="Stock" name="product_stkqty" id="product_stkqty"></div>
+                </div>
+
+
+                <div class="row mt-4 me-1">
+                    <div class="col-sm-6 col-12 d-flex justify-content-center">  <label class = "form-control border-0" for="#product_image">Image</label></div>
+                    <div class="col-sm-6 col-12" ><input class = "form-control" type="file" placeholder="Product ID" name="product_image" id="product_image"></div>
+                </div>
+
+                <button class ='btn btn-success form-control mt-4 mb-4' type="submit">Submit</button>
+
+
+
+
+
+
+
+
+
+
+
+            </form>
+            
+        </div>
+
+
+    </div>
+
+</section>

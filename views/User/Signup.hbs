@@ -1,0 +1,80 @@
+<section class="login">
+
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-4 col-sm-8 col-12 bg-whitesmoke offset-lg-4 offset-sm-2 mt-3 rounded-2 mb-4"
+      >
+        <div class="row bg-primary bg-gradient rounded-top text-white">
+          <h4 class="fw-bold pt-4 ps-4"><strtong>Signup</strtong></h4>
+          <p class="ps-4 pt-0 letter-spacing"><strong>We do not share your
+              personal information with anyone</strong></p>
+        </div>
+        <div class="row">
+
+          <form action="/signup" method="post">
+
+            <div class="line form-floating mb-2">
+
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                name="name"
+              />
+              <label for="email">Email</label>
+              <hr />
+            </div>
+
+            <div class="line">
+
+              <div class="input-group line">
+
+                <span
+                  class="input-group-text mt-1 mb-0 p-0 border-0 bg-light"
+                >+91</span>
+                <div class="form-floating mt-1 mb-0 p-0">
+                  <input
+                    type="text"
+                    class="form-control mb-0"
+                    placeholder="Mobile Number"
+                    name="mobile"
+                  />
+                  <label>Mobile Number</label>
+                </div>
+
+              </div>
+              <hr />
+            </div>
+
+            <div class="line form-floating mb-3">
+
+              <input
+                id="login-password"
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                name="password"
+              />
+              <label for="login-password">Password</label>
+              <hr />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-orange form-control mt-3 text-white"
+            >CONTINUE</button>
+          </form>
+
+        </div>
+        <div class="row p-2">
+          <p>Already have account?</p>
+          <a class="btn btn-secondary mb-3" href="/login">Login</a>
+          <small>By clicking “CONTINUE”, you agree to our Terms and Conditions ,
+            Privacy Policy and Cookie Policy</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

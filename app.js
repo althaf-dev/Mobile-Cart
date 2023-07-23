@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fileUpload = require("express-fileupload");
+var {connect}  = require("./configuration/connection");
+var session = require('express-session')
 
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
@@ -17,12 +19,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.engine('hbs',hbs.engine({extname:'hbs',layoutsDir:__dirname+'/views/Layout',partialsDir:__dirname+'/views/Partials/'}));
 
+connect();
 app.use(fileUpload());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 
 app.use('/', usersRouter);
 app.use('/admin',adminRouter);

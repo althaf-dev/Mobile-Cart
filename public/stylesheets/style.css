@@ -1,14 +1,38 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
 body {
+
   padding: 2px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: whitesmoke;
+  font-family: 'Roboto', sans-serif;
 }
-
+.letter-spacing{
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+}
 a {
   color: #00B7FF;
 }
 nav input:focus{
   border:none;
   outline: none;
+}
+.brand{
+  font-size: 1.2rem;
+}
+.brand:hover{
+
+  color:goldenrod;
+  font-weight: bolder;
+  background-color:  #002a3a ;
+  padding: 8px;
+  font-family: monospace;
+  border-radius: 10%;
+  transition: all 0.5s;
+  transform: scale(1.3);
 }
 .bg-search-button{
 
@@ -19,4 +43,70 @@ nav input:focus{
 .category li:hover{
    background-color:goldenrod;
    border-radius: 20%;
+}
+.card-bg{
+  background-color: hsla(0, 0%, 50%, 0.204);
+}
+.bg-whitesmoke{
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(15, 12, 12, 0.329);
+
+}
+.login input{
+
+   border:none ;
+   border-radius: 0;
+   border-bottom: 1px solid black;
+}
+
+.login input:focus{
+
+  border:none ;
+ 
+  outline:none ;
+  box-shadow: none;
+
+}
+hr{
+   margin-right: 100%;  
+}
+.line:focus-within hr{ 
+  transition: all 0.5s;
+  margin-right: 100%;  
+  animation: focusline 0.6s forwards;
+  color:#00B7FF;
+  background-color: #00B7FF;
+  height:4px;
+
+}
+.btn-orange{
+
+  background-color: rgb(255, 128, 0);
+}
+.btn-orange:hover{
+   background-color: rgb(255, 128, 0,0.8);
+}
+
+@keyframes focusline {
+ from{
+  margin-right: 100%;  
+ }
+ 30%{
+  margin-right: 70%;  
+ }
+ 50%{
+   margin-right: 50%;  
+ }
+ 80%{
+  margin-right: 20%;  
+ }
+ to{
+      margin-right: 0%;  
+ }
+  
+}
+
+.border-bottom-2{
+  border: none;
+
 }
