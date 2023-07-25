@@ -24,7 +24,7 @@
           <div class="card-body ps-1 pe-1 p-0">
             <p class="card-title" style="font-size: 0.9rem;">{{this.product_name}}</p>
             <p class="card-text mb-2"style="font-size: 1.2rem;" ><strong>{{this.product_price}}</strong></p>
-            <a href="#" class="btn btn-primary form-control" >Add To Cart</a>
+            <button class="btn btn-primary form-control" onclick="addToCart('{{this._id}}','{{user}}')" >Add To Cart</a>
           </div>
         </div>
       </div>

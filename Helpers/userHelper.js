@@ -1,5 +1,6 @@
 const { get } = require('../configuration/connection');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+var objectM = require('mongodb').ObjectId
 module.exports = {
 
   getProducts: () => {
@@ -44,6 +45,7 @@ module.exports = {
   doLogin:(user)=>{
 
     console.log("login");
+
     return new Promise((resolve,reject)=>{
 
        get().collection('user').find({mobile:user.mobile}).toArray().then((data)=>{
@@ -65,6 +67,46 @@ module.exports = {
        })
 
     })
+
+  },
+
+  addProductsToCart:(id,user)=>{
+
+
+    
+    return new Promise(async (resolve,reject)=>{
+
+      console.log("searching for cart")  
+       let  prodId = objectM.createFromHexString(id);
+       console.log(`proid = ${prodId}`);
+      let cart = await get().collection('cart').find({user:user}).toArray();
+      if(!cart.length){
+        console.log('cart not exist')
+        get().collection('cart').insertOne({user:user,products:[{item_id:id,qty:1}]}).then(()=>{
+
+        resolve('product added');
+      })
+      }
+      else{
+        
+        let proIndex = cart[0].products.findIndex((product)=>product.item_id==id);
+        console.log(proIndex);
+        if(proIndex===-1){
+          get().collection('cart').updateOne({user:user},{$push:{products:{item_id:prodId,qty:1}}})
+        }
+        else{
+          console.log("incrimenting")
+          get().collection('cart').updateOne({'products.item_id':prodId},{$inc:{'products.$.qty':1}})
+        }
+      console.log(cart);
+        console.log('cart exist')
+      }
+      
+      
+
+    })
+
+
 
   }
 }
