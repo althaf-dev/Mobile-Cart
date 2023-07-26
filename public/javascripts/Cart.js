@@ -17,5 +17,14 @@ function addToCart(id, user) {
         else if (response.status) {
             alert(`Product Add To Cart  for ${response.user}`)
         }
+        
+    })
+    $.ajax({
+
+        url:"/getTotalProduct",
+        type:'get'
+    }).done((result)=>{
+       
+        $('#qty').html(result.totalQty);
     })
 }

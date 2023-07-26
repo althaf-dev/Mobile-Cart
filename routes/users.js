@@ -73,13 +73,21 @@ router.post('/login',(req,res)=>{
   })
 })
 
-router.post('/addProductsToCart',verifiedLogin,(req,res,next)=>{
+router.post('/addProductsToCart',verifiedLogin, (req,res,next)=>{
 
   console.log(req.body);
   console.log(req.session.user)
+  
   userHelper.addProductsToCart(req.body.id,req.session.user).then(()=>{
     res.json({status:true,user:req.session.user})
   })
 
+})
+router.get('/getTotalProduct',verifiedLogin,async(req,res)=>{
+
+  console.log("call to get total")
+  let count = await userHelper.getTotalProduct(req.session.user);
+  console.log(count);
+  res.json({totalQty:count});
 })
 module.exports = router;
