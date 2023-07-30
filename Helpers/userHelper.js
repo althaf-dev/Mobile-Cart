@@ -70,19 +70,20 @@ module.exports = {
 
   },
 
-  addProductsToCart: (id, user) => {
+  addProductsToCart: (id, user,value=1) => {
 
 
 
     return new Promise(async (resolve, reject) => {
 
       console.log("searching for cart")
+      console.log(value);
       let prodId = objectM.createFromHexString(id);
-      console.log(`proid = ${prodId}`);
+      // console.log(`proid = ${prodId}`);
       let cart = await get().collection('cart').find({ user: user }).toArray();
       if (!cart.length) {
         console.log('cart not exist')
-        get().collection('cart').insertOne({ user: user, products: [{ item_id: id, qty: 1 }] }).then(() => {
+        get().collection('cart').insertOne({ user: user, products: [{ item_id: id, qty: 1}] }).then(() => {
 
           resolve('product added');
         })
@@ -96,10 +97,11 @@ module.exports = {
         }
         else {
           console.log("incrimenting")
-          get().collection('cart').updateOne({ 'products.item_id': prodId }, { $inc: { 'products.$.qty': 1 } })
+          get().collection('cart').updateOne({ 'products.item_id': prodId }, { $inc: { 'products.$.qty': Number(value) } })
         }
         // console.log(cart);
-        console.log('cart exist')
+        console.log('cart exist');
+        resolve();
       }
 
 
@@ -130,6 +132,85 @@ module.exports = {
           console.log(total[0].totalqty);
           resolve(total[0].totalqty);
        })
-}
+},
+
+  getCartProducts:(user)=>{
+
+
+    return new Promise (async(resolve,reject)=>{
+
+        let cart = await get().collection('cart').aggregate([
+          
+          {$match:{user:user}},
+          {$unwind:'$products'},
+          {$lookup:{from:'test',
+            localField:'products.item_id',
+            foreignField:"_id",
+            as:'pro'
+          }
+          },
+          {$unwind:'$pro'},
+          {$project:{'pro.product_price':1,'pro.product_name':1,'products.qty':1,'products.item_id':1,'total':{$multiply:['$products.qty','$pro.product_price']}}}
+        ]).toArray();
+        if(cart){
+
+          // console.log("cart exist");
+          // console.log(cart);
+          resolve(cart);
+        }
+
+    })
+    
+
+  },
+
+  getTotalPrice:(user)=>{
+
+
+    return new Promise (async(resolve,reject)=>{
+
+        let cart = await get().collection('cart').aggregate([
+          
+          {$match:{user:user}},
+          {$unwind:'$products'},
+          {$lookup:{from:'test',
+            localField:'products.item_id',
+            foreignField:"_id",
+            as:'pro'
+          }
+          },
+          {$unwind:'$pro'},
+          {$group:{_id:null,
+            total:{$sum:{$multiply:['$products.qty','$pro.product_price']}}
+          }}
+         
+        
+        
+        
+        ]).toArray();
+        if(cart){
+
+          // console.log("total");
+          console.log(cart);
+          resolve(cart[0].total);
+        }
+
+    })
+    
+
+  },
+
+  placeOrder:function(user,data){
+
+    return new Promise((resolve,reject)=>{
+
+      get().collection('order').insertOne(data).then(()=>{
+
+        resolve('true');
+      })
+
+
+    })
+  }
 
 }

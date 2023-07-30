@@ -1,0 +1,84 @@
+<section>
+  <div class="container">
+
+    <div class="row ">
+      <p id = "qty_loading" class="text-center mt-2 bg-success p-2 text-white">Quantity Updaing.....</p>
+      <div class="col-8 ">
+
+        <table class="table border-bottom mt-4 p-2" style="width:100%">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col" style="width:15%">Discount Amount</th>
+              <th scope="col" style="width:15%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each cart }}
+            <tr>
+
+              <td class=" p-2 ms-2" style="width:25%">
+                <div class="card mb-2" style="width: 300px; height = 40px">
+                  <div class="row g-0 ">
+                    <div class="col-md-4 p-2">
+                      <img src="images/product-images/{{ this.products.item_id }}.jpeg" class="img-fluid rounded-start "
+                        alt="product">
+                    </div>
+                    <div class="col-md-8 m-0 p-0">
+                      <div class="card-body m-0">
+                        <p class="card-title">{{ this.pro.product_name }}</p>
+                        <p class="card-text">
+                          <small class="text-muted">Sold by:E-mobile</small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="align-middle" style="width:15%">{{ this.pro.product_price }}</td>
+
+              <td class="align-middle" style="width:15%">
+                <div>
+                  <button id="dec" class=" me-2 border-0"
+                    onclick="quantityUpdate('{{ this.products.item_id }}',-1,event)">-</button>
+                    <span>{{ this.products.qty }}</span>
+                  <button id=" inc" class="ms-2 border-0"
+                    onclick="quantityUpdate('{{ this.products.item_id }}',+1,event)">+</button>
+                </div>
+              </td>
+              <td class="align-middle">0</td>
+              <td id="{{ this.products.item_id }}" class="align-middle">{{ this.total }}</td>
+
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="col-4 p-4 ">
+        <h4>Order Summary</h4>
+        <a href ='/checkout' class="btn  btn-success mb-3 form-control">CONTINUE TO CHECKOUT</a>
+        <div class="p-2 border">
+          <span  class="ms-3">Subtotal:</span>
+          <span id = 'cart_subtotal' class="float-end me-3">{{ Total }}</span>
+        </div>
+        <div class="p-2 border">
+          <span class="ms-3">Discount:</span>
+          <span class="float-end me-3">0</span>
+        </div>
+
+
+        <div class="p-2 border">
+          <span class="ms-3">Total:</span>
+          <span id = 'cart_total' class="float-end me-3">{{ Total }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+</section>
