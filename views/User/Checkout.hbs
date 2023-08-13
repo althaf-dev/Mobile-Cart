@@ -1,69 +1,89 @@
-<section>
-    <form action="/placeorder" method="post">
-    <div class="container">
+<section id="checkout-section">
+    <form id="checkout-form" onsubmit="placeOrder(event)">
+        <div class="container">
 
-        <div class="row ">
+            <div class="row ">
 
 
-            <div class="col-7  p-4">
-                <div class="row ">
-                    <div class="col-6 d-flex flex-column">
+                <div class="col-lg-7 col-12 p-4">
+                    <div class="row ">
+                        <div class="col-md-6 col-12 d-flex flex-column">
 
-                        <label class = "mt-4" for="">Full Name :</label>
-                        <input class = "mt-4 form-control" type="text" placeholder="Enter Your Full Name" name = 'fullName'>
+                            <label class="mt-4" for="">Full Name :</label>
+                            <input class="mt-4 form-control" type="text" placeholder="Enter Your Full Name"
+                                name='fullName'>
 
-                        <label  class = "mt-4"  for="">Mobile Number:</label>
-                        <input class = "mt-4 form-control" type="text" placeholder="Enter Your Mobile Number" name="mobileNumber">
+                            <label class="mt-4" for="">Mobile Number:</label>
+                            <input class="mt-4 form-control" type="text" placeholder="Enter Your Mobile Number"
+                                name="mobileNumber">
 
-                        <label  class = "mt-4"  for="">Whatsapp Number : </label>
-                        <input class = "mt-4 form-control" type="text" placeholder="Enter Your WhatsApp Number" name="whatsapp">
+                            <label class="mt-4" for="">Whatsapp Number : </label>
+                            <input class="mt-4 form-control" type="text" placeholder="Enter Your WhatsApp Number"
+                                name="whatsapp">
 
-                        <label  class = "mt-4"  for="">Email ID :</label>
-                        <input  class = 'mt-4 form-control' type="text" placeholder="Enter Your Email Address" name="Email">
-                        
+                            <label class="mt-4" for="">Email ID :</label>
+                            <input class='mt-4 form-control' type="text" placeholder="Enter Your Email Address"
+                                name="Email">
+
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label class="mt-4" for="">Choose Delivery Mode :</label>
+                            <select class="mt-4 form-select ">
+                                <option value="home">Home Delivery</option>
+                                <option value="shop">Shop Pickup</option>
+                            </select>
+                            <label class="mt-4" for="">Address:</label>
+                            <input class="mt-4 form-control" type="text" placeholder="Enter Your Address"
+                                name="address">
+
+                            <label class="mt-4" for="">Choose Payment Option :</label>
+                            <select class="mt-4 form-select ">
+                                <option value='cod'>Cash On Delivery</option>
+                                <option value='online'>Online</option>
+                            </select>
+
+                            <label class="mt-4" for="">Optional Note</label>
+                            <input class='mt-4 form-control' type="text" placeholder="Enter Your Optional note">
+                            <input value={{Total}} hidden name="Total">
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <label class = "mt-4" for="">Choose Delivery Mode :</label>
-                        <select class = "mt-4 form-select " >
-                            <option value="home">Home Delivery</option>
-                            <option value="shop">Shop Pickup</option>
-                        </select>   
-                        <label  class = "mt-4"  for="">Address:</label>
-                        <input class = "mt-4 form-control" type="text" placeholder="Enter Your Address" name="address">
-
-                        <label  class = "mt-4"  for="">Choose Payment Option :</label>
-                        <select class = "mt-4 form-select ">
-                            <option value = 'cod'>Cash On Delivery</option>
-                            <option value = 'online'>Online</option>
-                        </select>
-
-                        <label  class = "mt-4"  for="">Optional Note</label>
-                        <input  class = 'mt-4 form-control' type="text" placeholder="Enter Your Optional note">
+                </div>
+                <div class="col-lg-3 col-12 p-4 ">
+                    <h4>Order Summary</h4>
+                    <button type="submit" class="btn  btn-primary mb-3 form-control">PLACE ORDER</button>
+                    <div class="p-2 border">
+                        <span class="ms-3">Subtotal:</span>
+                        <span id='order_subtotal' class="float-end me-3">{{ Total }}</span>
                     </div>
-                </div>
-            </div>
-            <div class="col-3 p-4 ">
-                <h4>Order Summary</h4>
-                <button type="submit" class="btn  btn-primary mb-3 form-control">PLACE ORDER</button>
-                <div class="p-2 border">
-                    <span class="ms-3">Subtotal:</span>
-                    <span id='order_subtotal' class="float-end me-3">{{ Total }}</span>
-                </div>
-                <div class="p-2 border">
-                    <span class="ms-3">Discount:</span>
-                    <span class="float-end me-3">0</span>
-                </div>
+                    <div class="p-2 border">
+                        <span class="ms-3">Discount:</span>
+                        <span class="float-end me-3">0</span>
+                    </div>
 
 
-                <div class="p-2 border">
-                    <span class="ms-3">Total:</span>
-                    <span id='order_total' class="float-end me-3">{{ Total }}</span>
+                    <div class="p-2 border">
+                        <span class="ms-3">Total:</span>
+                        <span id='order_total' class="float-end me-3">{{ Total }}</span>
+                    </div>
+
                 </div>
+
 
             </div>
-
-
-        </div>
 
     </form>
-    </section>
+
+</section>
+<div class="mt-5 text-center">
+    <div id="loader" class="spinner-border text-success"  style="width: 5rem; height: 5rem;" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+</div>
+
+<div id="message" class="ms-5 text-center me-auto float-center mt-5 text-success">
+
+    <h1 class="fw-bold">CONGRATULATIONS...</h1>
+    <h3>ORDER PLACED SUCCESSFULLY</h3>
+    <pc class="text-dark">Order Id :
+        </p>
+</div>

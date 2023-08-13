@@ -15,11 +15,23 @@ router.post("/add-banner", (req, res) => {
   console.log(req.files.image.name)
 });
 
-router.get('/product-control', (req, response) => {
+router.get('/product-control', async(req, res) => {
 
-  response.render('Admin/ProductControl', { admin: true })
+  let products =await adminHelper.getProducts()
+  res.render('Admin/ProductControl', { admin: true,products })
 })
 
+router.get("/productslist",async(req,res)=>{
+  let products =await adminHelper.getProductNames()
+  res.json({products});
+})
+router.get('/order-control',async (req,res)=>{
+
+  let orders =  await adminHelper.getOrders();
+  console.log(orders);
+  res.render('Admin/OrderManagement',{orders});
+
+})
 router.get('/add-product', (req, res) => {
 
   res.render('Admin/AddProduct', { admin: true })
@@ -37,5 +49,8 @@ router.post('/add-product', (req, res) => {
   })
  
  
+})
+router.get('/banner-upload',(req,res)=>{
+  res.render("Admin/Banner")
 })
 module.exports = router;

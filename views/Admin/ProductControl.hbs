@@ -5,20 +5,28 @@
       <table class="table">
   <thead>
     <tr>
-      <th scope="col">product Id</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Brand</th>
-      <th scope="col">Price</th>
+      <th  style="width:10%" scope="col">product Id</th>
+      <th style="width:5%;" scope="col">Product Name</th>
+      <th  style="width:10%;" scope="col">Brand</th>
+      <th style="width:10%;" scope="col">Price</th>
+      <th style="width:10%;"scope="col">Stock</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
       
     </tr>
   </thead>
   <tbody>
+    {{#each products}}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{this.product_id}}</th>
+      <td ><div class="overflow-hidden" style="width: 400px;">{{this.product_name}}</div></td>
+      <td>{{this.product_brand}}</td>
+      <td>{{this.product_price}}</td>
+      <td>{{this.product_stkqty}}</td>
+      <td><button class="btn btn-outline-primary">Edit</button></td>
+      <td><button class="btn btn-outline-danger">Delete</button></td>
     </tr>
+    {{/each}}
   </tbody>
 </table>
 </div>

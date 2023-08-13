@@ -4,12 +4,13 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex me-auto ms-5 mt-2 input-group border border-1 border-dark rounded-2">
+    <form action ="/productsearch" method="post" class="d-flex me-auto ms-lg-5 ms-2 mt-2 input-group border border-1 border-dark rounded-2">
         <span class="fa-solid fa-search input-group-text p-3 bg-light"></span>
-        <input class="border-0 ps-5 pe-5 " type="search" placeholder="Search Products" aria-label="Search" size="80">
-        <button class="  ps-4 pe-4  bg-search-button text-white form-control"  type="submit">Search</button>
+        <input id= "search" class="border-0 ps-5 pe-5 form-control ui-widget" type="search" placeholder="Search Products" name = "product_name" aria-label="Search" size="80">
+        <button class="  ps-4 pe-4  bg-search-button text-white "  type="submit">Search</button>
       </form>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
       <ul class="navbar-nav  mb-2 mb-lg-0">
        
      
@@ -42,3 +43,7 @@
     </div>
   </div>
 </nav>
+<script>
+
+
+</script>

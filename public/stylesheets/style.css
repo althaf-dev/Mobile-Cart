@@ -9,6 +9,35 @@ body {
   background-color: whitesmoke;
   font-family: 'Roboto', sans-serif;
 }
+input:focus{
+  box-shadow: none !important;
+}
+.anim:hover{
+  transition: all 1s;
+  border: 2px solid goldenrod !important;
+  transform: scale(1.4);
+}
+.btn-hover:hover{
+  transition: all 0.5s;
+  background-color: goldenrod !important;
+  border: 2px solid goldenrod !important;
+  animation: addcartbtn_ainim 1s ease-in-out 0.1s forwards;
+}
+@keyframes addcartbtn_ainim {
+
+  0%{
+    transform: rotate(0deg);
+  }
+  25%{
+    transform: rotate(-2deg);
+  }
+  50%{
+    transform: rotate(3deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
+}
 .letter-spacing{
   letter-spacing: 0.05em;
   font-size: 0.7rem;

@@ -1,0 +1,30 @@
+<section>
+ 
+ <div class="container ">
+    <div class="row mt-1 p-1 g-0">
+    <div class="col-6  p-0 m-0">
+        <img  class="m-0 p-0" src="images/product-images/{{product._id}}.jpeg" alt="product" height="550px" >
+    </div>
+    <div class="col-5 p-0 m-0  d-flex flex-column align-items-evenly">
+        <div class="mt-4">
+            <h5 class="fw-bold">{{product.product_name}}</h5>
+        </div>
+        <div class="mt-2">
+            <h1 class="text-primary">RS {{product.product_price}}</h1>
+        </div>
+    
+        <div class="mt-4">
+            {{#if product.product_stkqty}}
+            <p class="text-success">Instock <span></span>{{product.product_stkqty}}</p>
+            <p>Order now & Get it delivered Today !!</p>
+            {{/if}}
+        </div>
+        <div class="mt-1 mb-4 p-2">
+            <label>QTY</label>
+            <input class="ms-2 text-center p-0 pt-2 pb-2 rounded-2" type="number" value="1" size="3" maxlength="3" style="width: 3rem;" >
+            <button class="btn btn-primary ms-2 " onclick="addToCart('{{product._id}}','{{user}}','Opencart')">BUY NOW</button>
+        </div>
+    </div>
+    </div>
+ </div>
+</section>

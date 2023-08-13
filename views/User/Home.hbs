@@ -17,14 +17,17 @@
     <div class="row">
       <h5>Most Viewed Smartphones</h5>
       {{#each products}}
-      <div class="col-lg-2 col-md-3 col-sm-4 col-12 mt-2">
+      <div class="col-lg-2 col-md-3 col-sm-4 col-6  mt-2">
 
-        <div class="card card-bg border rounded-2" style="width: 12rem; height:21rem">
-          <img src="images/product-images/{{this._id}}.jpeg" class=" card-top-image border border-1 border-secondary  mb-1 rounded-2" alt="{{this.product_id}}" height="200rem" />
+        <div class="card card-bg border rounded-2" style="width: 12rem; height:20rem">
+          <img src="images/product-images/{{this._id}}.jpeg" class=" card-top-image border border-1 border-secondary  mb-1 rounded-2 anim" alt="{{this.product_id}}" height="200rem" />
           <div class="card-body ps-1 pe-1 p-0">
-            <p class="card-title" style="font-size: 0.9rem;">{{this.product_name}}</p>
+            <div class="overflow-hidden" style="height: 2.2rem;text-overflow:clip">
+               <p class="card-title" style="font-size: 0.9rem; ">{{this.product_name}}</p>
+            </div>
+           
             <p class="card-text mb-2"style="font-size: 1.2rem;" ><strong>{{this.product_price}}</strong></p>
-            <button class="btn btn-primary form-control" onclick="addToCart('{{this._id}}','{{user}}')" >Add To Cart</a>
+            <button class="btn btn-primary form-control btn-hover" onclick="addToCart('{{this._id}}','{{user}}')" >Add To Cart</a>
           </div>
         </div>
       </div>

@@ -1,34 +1,35 @@
 <section>
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row ">
       <p id = "qty_loading" class="text-center mt-2 bg-success p-2 text-white">Quantity Updaing.....</p>
-      <div class="col-8 ">
-
-        <table class="table border-bottom mt-4 p-2" style="width:100%">
+      <div class="col-lg-8  col-12 table-responsive ">
+        <div class="table-responsive">
+          <table class="table border-bottom mt-4 p-2" >
           <thead>
             <tr>
               <th scope="col">Product</th>
               <th scope="col">Unit Price</th>
               <th scope="col">Quantity</th>
-              <th scope="col" style="width:15%">Discount Amount</th>
-              <th scope="col" style="width:15%">Total</th>
+              <th scope="col">Discount Amount</th>
+              <th scope="col" >Total</th>
             </tr>
           </thead>
           <tbody>
             {{#each cart }}
             <tr>
 
-              <td class=" p-2 ms-2" style="width:25%">
-                <div class="card mb-2" style="width: 300px; height = 40px">
+              <td class=" col-lg-3 col-sm-4  p-2 ms-2" >
+                <div class="card mb-2" >
                   <div class="row g-0 ">
-                    <div class="col-md-4 p-2">
+                    <div class="col-md-4 col-12 p-lg-2">
                       <img src="images/product-images/{{ this.products.item_id }}.jpeg" class="img-fluid rounded-start "
                         alt="product">
                     </div>
                     <div class="col-md-8 m-0 p-0">
                       <div class="card-body m-0">
-                        <p class="card-title">{{ this.pro.product_name }}</p>
+                        <p class="card-title d-lg-block d-none">{{ this.pro.product_name }}</p>
+                         <small class="card-title d-lg-none ">{{ this.pro.product_name }}</small>
                         <p class="card-text">
                           <small class="text-muted">Sold by:E-mobile</small>
                         </p>
@@ -37,14 +38,14 @@
                   </div>
                 </div>
               </td>
-              <td class="align-middle" style="width:15%">{{ this.pro.product_price }}</td>
+              <td class="align-middle">{{ this.pro.product_price }}</td>
 
-              <td class="align-middle" style="width:15%">
+              <td class="align-middle">
                 <div>
-                  <button id="dec" class=" me-2 border-0"
+                  <button id="dec" class=" me-lg-2 border-0"
                     onclick="quantityUpdate('{{ this.products.item_id }}',-1,event)">-</button>
                     <span>{{ this.products.qty }}</span>
-                  <button id=" inc" class="ms-2 border-0"
+                  <button id=" inc" class="ms-lg-2 border-0"
                     onclick="quantityUpdate('{{ this.products.item_id }}',+1,event)">+</button>
                 </div>
               </td>
@@ -55,10 +56,12 @@
             {{/each}}
           </tbody>
         </table>
+        </div>
+        
 
 
       </div>
-      <div class="col-4 p-4 ">
+      <div class="col-lg-4  col-12 p-4 ">
         <h4>Order Summary</h4>
         <a href ='/checkout' class="btn  btn-success mb-3 form-control">CONTINUE TO CHECKOUT</a>
         <div class="p-2 border">
