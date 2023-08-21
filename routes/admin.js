@@ -29,7 +29,7 @@ router.get('/order-control',async (req,res)=>{
 
   let orders =  await adminHelper.getOrders();
   console.log(orders);
-  res.render('Admin/OrderManagement',{orders});
+  res.render('Admin/OrderManagement',{orders,admin:true});
 
 })
 router.get('/add-product', (req, res) => {
@@ -39,18 +39,48 @@ router.get('/add-product', (req, res) => {
 
 router.post('/add-product', (req, res) => {
 
-  
- 
   let img = req.files.product_image;
   adminHelper.addProduct(req.body).then((id) => {
     console.log(id); 
     img.mv("public/images/product-images/"+id+".jpeg")
     res.redirect("/admin/add-product");
   })
- 
- 
+})
+
+router.get('/edit-product',(req,res)=>{
+
+  let proName = req.query.proname;
+  let price  = req.query.price;
+  let brand  = req.query.br
+  let stock  = req.query.st
+  let proid  = req.query.proid
+  let id     = req.query.id
+  console.log(`Query= ${id}`)
+  res.render('Admin/EditProducts',{proName,price,brand,stock,proid,id})
+
+})
+router.post('/edit-product/:id',(req,res)=>{
+  let id = req.params.id
+  console.log(`id is to update ${id}`)
+  adminHelper.updateProduct(id,req.body).then(()=>{
+    res.redirect('/admin/product-control')
+  })
 })
 router.get('/banner-upload',(req,res)=>{
   res.render("Admin/Banner")
+})
+
+router.get('/view-order-products',async(req,res)=>{
+  let orderId = req.query.id;
+  let order = await adminHelper.getProductsFromOrder(orderId );
+  let products = adminHelper.productWrapper(order);
+  // console.log(products);
+  res.render('Admin/ViewOrderProducts',{products,orderId})
+})
+router.post('/update-order-products',async(req,res)=>{
+
+  console.log("admin update")
+  await adminHelper.updateOrderProductStatus(req.body.orderId,req.body.proId,req.body.Ss);
+
 })
 module.exports = router;

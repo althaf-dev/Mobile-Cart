@@ -3,9 +3,19 @@ const bcrypt = require('bcrypt');
 var objectM = require('mongodb').ObjectId
 module.exports = {
 
-  getProducts: () => {
+  getProducts: (category, min = 0, max = 10000) => {
+
+
     return new Promise(async (resolve, reject) => {
-      let product = await get().collection('test').find({}).toArray();
+      let product;
+      if (category != 'all') {
+        unfilteredProduct = await get().collection('test').find({ 'product_brand': category.toLowerCase() }).toArray();
+        product = unfilteredProduct.filter(prod => prod.product_price >= min && prod.product_price <= max);
+      }
+      else {
+        product = await get().collection('test').find({}).toArray();
+      }
+
       if (product) {
         resolve(product);
       }
@@ -49,7 +59,7 @@ module.exports = {
       let cart = await get().collection('cart').find({ user: user }).toArray();
       if (!cart.length) {
         console.log('cart not exist')
-        get().collection('cart').insertOne({ user: user, products: [{ item_id: id, qty: 1 }] }).then(() => {
+        get().collection('cart').insertOne({ user: user, products: [{ item_id: prodId, qty: 1,Ss:"Pending",Ds:"Pending" }] }).then(() => {
           resolve('product added');
         })
       }
@@ -58,7 +68,7 @@ module.exports = {
         let proIndex = cart[0].products.findIndex((product) => product.item_id == id);
         console.log(proIndex);
         if (proIndex === -1) {
-          get().collection('cart').updateOne({ user: user }, { $push: { products: { item_id: prodId, qty: 1 } } })
+          get().collection('cart').updateOne({ user: user }, { $push: { products: { item_id: prodId, qty: 1,Ss:"Pending",Ds:"Pending" } } })
         }
         else {
           console.log("incrimenting")
@@ -104,9 +114,25 @@ module.exports = {
       if (cart) {
         resolve(cart);
       }
+
     })
   },
+  removeCartItem : (user,id)=>{
 
+      return new Promise(async(resolve,reject)=>{
+
+        let cart = await get().collection('cart').findOne({'user':user});
+        let prodId = objectM.createFromHexString(id);
+        let index = cart.products.findIndex(product=>product.item_id==id);
+        console.log(`index=${index}`);
+        if(index!=-1){
+          get().collection('cart').updateOne({'user':user},{$pull:{products:{item_id:prodId}}}).then((data)=>{
+              resolve(data);
+          })
+        }
+
+      })
+  },
   getTotalPrice: (user) => {
     return new Promise(async (resolve, reject) => {
       let cart = await get().collection('cart').aggregate([
@@ -129,7 +155,7 @@ module.exports = {
         }
       ]).toArray();
       if (cart) {
-        console.log(cart);
+        // console.log(`cart=${cart[0]}`);
         resolve(cart[0].total);
       }
     })
@@ -146,12 +172,32 @@ module.exports = {
       })
     })
   },
-  findProduct: (proName)=>{
+  findProduct: (proName) => {
 
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
 
-      let product = get().collection('test').findOne({product_name:proName})
+      let product = get().collection('test').findOne({ product_name: proName })
       resolve(product);
     })
-  }
+  },
+  getOrders:(user)=>{
+    return new Promise(async(resolve,reject)=>{
+      let orders = await get().collection('order').aggregate([
+        { $match: { 'mobileNumber':user } },
+        { $unwind: '$products' },
+        {
+          $lookup: {
+            from: 'test',
+            localField: 'products.item_id',
+            foreignField: "_id",
+            as: 'pro'
+          }
+        }
+      
+      ]).toArray();
+      if (orders) {
+        resolve(orders);
+      }
+    })
+}
 }

@@ -1,39 +1,54 @@
-<section>
+<section class="container">
 
-    <h3 class="text-center fw-bold mt-3"> ORDERS </h3>
-    <table class="table border-top mt-5 ms-2 text-center">
-        <thead>
-            <tr>
-                <th style="width:20%" scope="col">Order Id</th>
-                <th style="width:10%" scope="col">User</th>
-                <th style="width:10%" scope="col">Payment status</th>
-                <th style="width:20%" scope="col">Shipping Status</th>
-                <th  scope="col">Delivery Status</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each orders}}
-            <tr>
-                <th scope="row">{{this._id}}</th>
-                <td>{{this.fullName}}</td>
-                <td>Online</td>
-                <td><select class="border-0 bg-primary bg-gradient text-white rounded-2 p-1 text-center"
-                        style="width:40%">
-                        <option value="Pending" label="Pending">Pending</option>
-                        <option value="Started" label="Started">Started</option>
-                        <option value="NotStarted" label="Not Started">Not Started</option>
-                        <option value="Compeleted" label="Compeleted">Compeleted</option>
-                    </select></td>
-                <td><select class="border-0 bg-primary text-white rounded-2 p-1 text-center" style="width:40%">
-                        <option value="Pending" label="Pending">Pending</option>
-                        <option value="Started" label="Started">Started</option>
-                        <option value="NotStarted" label="Not Started">Not Started</option>
-                        <option value="Compeleted" label="Compeleted">Compeleted</option>
-                    </select></td>
-                <td ><button class="btn btn-outline-primary">View Order</button></td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+    <h3 class="text-center fw-bold mt-2 mb-3">
+        ORDERS
+    </h3>
+    <div class="row overflow-auto border border-1 rounded-1 border-dark" style="max-height: 83%">
+        <table class="table table-hover  table-info ">
+            <thead class="p-2 sticky-top">
+                <tr class="align-middle text-center fs-5 table-active">
+                    <th style="width:20%" scope="col">Order Id</th>
+                    <th style="width:10%" scope="col">User</th>
+                    <th style="width:10%" scope="col">Payment status</th>
+                    <th style="width:20%" scope="col">Shipping Status</th>
+                    <th scope="col">Delivery Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                    <tr class="align-middle text-center">
+                        <th scope="row">{{ this._id }}</th>
+                        <td>{{ this.fullName }}</td>
+                        <td>Online</td>
+                        <form action="">
+
+                        </form>
+                        <td>
+                            <select class="border-0 bg-primary bg-gradient text-white rounded-2 p-1 text-center"
+                             style="width:40%"
+                             >
+                                <option value="Pending" label="Pending">Pending</option>
+                                <option value="Started" label="Started">Started</option>
+                                <option value="NotStarted" label="Not Started">Not Started</option>
+                                <option value="Compeleted" label="Compeleted">Compeleted</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="border-0 bg-primary text-white rounded-2 p-1 text-center" style="width:40%">
+                                <option value="Pending" label="Pending">Pending</option>
+                                <option value="Started" label="Started">Started</option>
+                                <option value="NotStarted" label="Not Started">Not Started</option>
+                                <option value="Compeleted" label="Compeleted">Compeleted</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a href = '/admin/view-order-products?id={{ this._id }}' class="btn btn-outline-primary">View Order</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+ 
 </section>

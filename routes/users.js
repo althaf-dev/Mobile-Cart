@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
     req.session.destroy;
     user=null;
   }
-  userHelper.getProducts().then((products)=>{
+  userHelper.getProducts('all').then((products)=>{
 
     console.log("session")
     if(user){
@@ -80,8 +80,16 @@ router.get('/getTotalProduct',verifiedLogin,async(req,res)=>{
 
 router.get("/cart",verifiedLogin,async (req,res)=>{
 
-  let Total = await userHelper.getTotalPrice(req.session.user);
-  userHelper.getCartProducts(req.session.user).then((cart)=>{
+  let Total;
+  userHelper.getCartProducts(req.session.user).then(async(cart)=>{
+    console.log("cart recieved")
+    if(cart.length){
+      Total = await userHelper.getTotalPrice(req.session.user);
+    }
+    else{
+      Total = 0;
+    }
+    console.log(cart)
     res.render('User/Cart',{cart,Total});
   });
   
@@ -115,11 +123,43 @@ router.get("/order-success" ,(req,res)=>{
   
 })
 
+router.get("/product-category",(req,res)=>{
+
+    let category = req.query.cat;
+    userHelper.getProducts(category).then((products)=>{
+      res.render("User/ProductCategory",{products,category:category.toUpperCase()})
+    });
+
+})
+router.post("/filter-product",(req,res)=>{
+  userHelper.getProducts(req.body.category,Number(req.body.minPrice),Number(req.body.maxPrice)).then((products)=>{
+    res.render("User/ProductCategory",{min:req.body.minPrice, max:req.body.maxPrice,products,category:req.body.category.toUpperCase()})
+  })
+})
 router.post("/productsearch",async(req,res)=>{
-  console.log(req.body)
   let product = await userHelper.findProduct(req.body.product_name);
-  console.log(product);
   res.render("User/ProductSearchResult.hbs",{product})
+})
+router.get("/productsearch",async(req,res)=>{
+  console.log(req.body)
+  let product = await userHelper.findProduct(req.query.product_name);
+  res.render("User/ProductSearchResult.hbs",{product})
+})
+router.get('/remove-cart-item',(req,res)=>{
+  let id = req.query.id;
+  let user = req.session.user;
+  console.log("cart item remove",id);
+  userHelper.removeCartItem(user,id).then(()=>{
+
+    res.redirect('/cart');
+  })
+})
+router.get('/orders',async(req,res)=>{
+  let user = req.session.user;
+  let orders = await userHelper.getOrders(user);
+  console.log("orders");
+  console.log(orders);
+  res.render('User/Orders',{orders});
 })
 module.exports = router;
 

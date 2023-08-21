@@ -15,6 +15,7 @@ input:focus{
 .anim:hover{
   transition: all 1s;
   border: 2px solid goldenrod !important;
+  z-index: 500;
   transform: scale(1.4);
 }
 .btn-hover:hover{
@@ -66,8 +67,49 @@ nav input:focus{
 .bg-search-button{
 
   background-color: #002a3a !important;
+}
+.search-pro-input input:focus{
+    border:none;
+    outline: none;
+}
+.cart a{
 
+  text-decoration: none;
+  color: black;
+}
+.cart a:hover{
 
+  color: blue;
+}
+.btn-orange{
+  background-color: orange;
+  color: white;
+}
+.search-pro-input{
+  border:1.5px solid grey;
+  border-radius: 8px;
+}
+.search-pro-input:focus-within{
+  border:2px solid black;
+  border-radius: 8px;
+  outline: none;
+}
+.cart-table-hover:hover{
+  transition:all 0.2s;
+  background-color:whitesmoke;
+  transform:scaleY(1.05);
+  font-weight: bold;
+  
+  
+}
+.price-box:hover{
+  transition: all 0.5s;
+
+  transform: translateX(-100px);
+
+}
+.cart-table-shadow{
+  box-shadow: 5px 5px 5px 5px #3333334b;
 }
 .category li:hover{
    background-color:goldenrod;

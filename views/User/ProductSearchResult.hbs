@@ -3,7 +3,7 @@
  <div class="container ">
     <div class="row mt-1 p-1 g-0">
     <div class="col-6  p-0 m-0">
-        <img  class="m-0 p-0" src="images/product-images/{{product._id}}.jpeg" alt="product" height="550px" >
+        <img  class="m-0 p-0" src="/images/product-images/{{product._id}}.jpeg" alt="product" height="550px" >
     </div>
     <div class="col-5 p-0 m-0  d-flex flex-column align-items-evenly">
         <div class="mt-4">
@@ -23,6 +23,7 @@
             <label>QTY</label>
             <input class="ms-2 text-center p-0 pt-2 pb-2 rounded-2" type="number" value="1" size="3" maxlength="3" style="width: 3rem;" >
             <button class="btn btn-primary ms-2 " onclick="addToCart('{{product._id}}','{{user}}','Opencart')">BUY NOW</button>
+            <a href ="/cart" class="btn btn-orange">GO TO CART </a>
         </div>
     </div>
     </div>

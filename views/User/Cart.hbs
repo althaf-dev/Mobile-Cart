@@ -1,87 +1,122 @@
-<section>
-  <div class="container-fluid">
+<section class="container">
 
-    <div class="row ">
-      <p id = "qty_loading" class="text-center mt-2 bg-success p-2 text-white">Quantity Updaing.....</p>
-      <div class="col-lg-8  col-12 table-responsive ">
-        <div class="table-responsive">
-          <table class="table border-bottom mt-4 p-2" >
-          <thead>
-            <tr>
-              <th scope="col">Product</th>
-              <th scope="col">Unit Price</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Discount Amount</th>
-              <th scope="col" >Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each cart }}
-            <tr>
-
-              <td class=" col-lg-3 col-sm-4  p-2 ms-2" >
-                <div class="card mb-2" >
-                  <div class="row g-0 ">
-                    <div class="col-md-4 col-12 p-lg-2">
-                      <img src="images/product-images/{{ this.products.item_id }}.jpeg" class="img-fluid rounded-start "
-                        alt="product">
-                    </div>
-                    <div class="col-md-8 m-0 p-0">
-                      <div class="card-body m-0">
-                        <p class="card-title d-lg-block d-none">{{ this.pro.product_name }}</p>
-                         <small class="card-title d-lg-none ">{{ this.pro.product_name }}</small>
-                        <p class="card-text">
-                          <small class="text-muted">Sold by:E-mobile</small>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle">{{ this.pro.product_price }}</td>
-
-              <td class="align-middle">
-                <div>
-                  <button id="dec" class=" me-lg-2 border-0"
-                    onclick="quantityUpdate('{{ this.products.item_id }}',-1,event)">-</button>
-                    <span>{{ this.products.qty }}</span>
-                  <button id=" inc" class="ms-lg-2 border-0"
-                    onclick="quantityUpdate('{{ this.products.item_id }}',+1,event)">+</button>
-                </div>
-              </td>
-              <td class="align-middle">0</td>
-              <td id="{{ this.products.item_id }}" class="align-middle">{{ this.total }}</td>
-
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
-        </div>
-        
-
-
-      </div>
-      <div class="col-lg-4  col-12 p-4 ">
-        <h4>Order Summary</h4>
-        <a href ='/checkout' class="btn  btn-success mb-3 form-control">CONTINUE TO CHECKOUT</a>
-        <div class="p-2 border">
-          <span  class="ms-3">Subtotal:</span>
-          <span id = 'cart_subtotal' class="float-end me-3">{{ Total }}</span>
-        </div>
-        <div class="p-2 border">
-          <span class="ms-3">Discount:</span>
-          <span class="float-end me-3">0</span>
-        </div>
-
-
-        <div class="p-2 border">
-          <span class="ms-3">Total:</span>
-          <span id = 'cart_total' class="float-end me-3">{{ Total }}</span>
-        </div>
-
-      </div>
-
+    <div class="row">
+        <p id="qty_loading" class="text-center mt-2 bg-info p-2 text-white">Quantity Updaing.....</p>
     </div>
+    <div class="row" style="min-height: 85%">
 
 
-</section>
+        <div class="col-lg-8  col-12 mt-4 ">
+            <div class="overflow-auto border border-2 cart-table-shadow" style="min-height: 95% ;letter-spacing:0.1rem">
+                <table class="table  p-2 bg-light">
+                    {{#if cart}}
+                        <thead class="p-2 sticky-top  ">
+                            <tr class="align-middle text-center fs-6 table-active ">
+                                <th scope="col">Product</th>
+                                <th scope="col">Unit Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                    {{/if}}
+                    <tbody>
+                        {{#unless cart}}
+                        <div class="d-flex justify-content-center">
+                          <img class="ms-1" src="images/CartEmpty/Cartyemptyimage.jpg" alt="cart empty" width="400px" height='300px'/>
+                        </div>
+                            
+                            <h2 class="text-center mt-5">CART IS EMPTY!</h2>
+                            <p class="text-center">Explore our wide selection and find something you like</p>
+                        {{/unless}}
+                        {{#each cart }}
+                            <tr class="align-middle text-center cart-table-hover">
+
+                                <td class=" col-lg-3 col-sm-4  p-2 ms-3">
+                                    <div class="card mb-2">
+                                        <div class="row g-0 ">
+                                            <div class="col-md-4 col-12 p-lg-2">
+                                                <img src="images/product-images/{{ this.products.item_id }}.jpeg" class="img-fluid rounded-start " alt="product"></div>
+                                                <div class="col-md-8 m-0 p-0">
+                                                    <div class="card-body m-0 cart">
+                                                      
+                                                        <a href="/productsearch?product_name={{this.pro.product_name}}" class="card-title d-lg-block d-none">{{ this.pro.product_name }}</a>
+                                                        <small class="card-title d-lg-none ">{{ this.pro.product_name }}</small>
+                                                        <p class="card-text">
+                                                            <small class="text-muted">Sold by:E-mobile</small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">{{ this.pro.product_price }}</td>
+
+                                    <td class="align-middle">
+                                        <div>
+                                            <button id="dec" class=" btn btn-outline-secondary fw-semibold me-lg-2 border-0" onclick="quantityUpdate('{{ this.products.item_id }}',-1,event)">-</button>
+                                            <span>{{ this.products.qty }}</span>
+                                            <button id=" inc" class="ms-lg-2 border-0 btn btn-outline-success fw-semibold" onclick="quantityUpdate('{{ this.products.item_id }}',+1,event)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">0</td>
+                                    <td id="{{ this.products.item_id }}" class="align-middle">{{ this.total }}</td>
+                                    <td>
+                                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#itemRemove">Remove</a>
+                                    </td>
+
+                                  
+
+                                    <div class="modal fade" id="itemRemove" tabindex="-1" aria-labelledby="itemRemoveModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="itemRemoveModal">Remove Item</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-dark">
+                                                    Are you sure you want to remove this item?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                                                    <a href="/remove-cart-item?id={{ this.products.item_id }}" type="button" class="btn btn-primary">REMOVE</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            {{#if cart}}
+            <div class="col-lg-3  col-12 p-4 offset-lg-1 cart-table-shadow mt-4 price-box " style="height: 92%">
+                <h4 class="mt-2 mb-3 text-center">PRICE DETAILS</h4>
+                <a href='/checkout' class="btn  btn-success mb-3 form-control">CONTINUE TO CHECKOUT</a>
+                <div class="p-1 border d-flex">
+                    <h5 class="ms-3">Subtotal</h5>
+                    <h5 id='cart_subtotal' class="float-end ms-auto ">{{ Total }}</h5>
+                </div>
+                <div class="p-1 border d-flex">
+                    <h5 class="ms-3">Discount</h5>
+                    <h5 class="float-end ms-auto">0</h5>
+                </div>
+
+
+                <div class="p-1 border d-flex">
+                    <h5 class="ms-3">Total</h5>
+                    <h5 id='cart_total' class="float-end ms-auto">{{ Total }}</h5>
+                </div>
+
+            </div>
+            {{/if}}
+
+
+            <!-- Modal -->
+
+        </section>

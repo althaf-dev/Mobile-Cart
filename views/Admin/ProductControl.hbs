@@ -1,34 +1,47 @@
-<section>
+<section class="container border border-1 border-dark rounded-3">
+  <div class="row  rounded-1 p-0 mt-2 mb-2 mt-2 sticky-top">
+    <div class="col-7 offset-3 p-0  d-flex  search-pro-input">
+      <input class=" flex-grow-1 rounded-3 p-2 border-0 " type="text" placeholder="Search products...">
+      <button class="btn btn-dark border-start-0 rounded-0 rounded-end  ">Search</button>
 
-<a class="float-end me-5 btn btn-primary" href="/admin/add-product">Add products</a>
-<div>
-      <table class="table">
-  <thead>
-    <tr>
-      <th  style="width:10%" scope="col">product Id</th>
-      <th style="width:5%;" scope="col">Product Name</th>
-      <th  style="width:10%;" scope="col">Brand</th>
-      <th style="width:10%;" scope="col">Price</th>
-      <th style="width:10%;"scope="col">Stock</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    {{#each products}}
-    <tr>
-      <th scope="row">{{this.product_id}}</th>
-      <td ><div class="overflow-hidden" style="width: 400px;">{{this.product_name}}</div></td>
-      <td>{{this.product_brand}}</td>
-      <td>{{this.product_price}}</td>
-      <td>{{this.product_stkqty}}</td>
-      <td><button class="btn btn-outline-primary">Edit</button></td>
-      <td><button class="btn btn-outline-danger">Delete</button></td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
-</div>
-  
+    </div>
+    <div class="col-2">
+      <a class="ms-5 me-auto btn btn-primary  " href="/admin/add-product">Add products</a>
+    </div>
+  </div>
+
+  <div class="row overflow-scroll" style="height: 83%">
+    <table class="table table-hover  table-info ">
+      <thead class="p-2 sticky-top">
+        <tr class="align-middle text-center fs-5 table-active">
+          <th style="width:10%" scope="col">Product Id</th>
+          <th class="align-middle" style="width:5%;" scope="col">Product Name</th>
+          <th style="width:10%;" scope="col">Brand</th>
+          <th style="width:10%;" scope="col">Price</th>
+          <th style="width:10%;" scope="col">Stock</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+        <tr class="align-middle text-center">
+          <th scope="row">{{this.product_id}}</th>
+          <td>
+            <div class="overflow-hidden" style="width: 400px;">{{this.product_name}}</div>
+          </td>
+          <td>{{this.product_brand}}</td>
+          <td>{{this.product_price}}</td>
+          <td>{{this.product_stkqty}}</td>
+          <td><a href="/admin/edit-product?proname={{this.product_name}}
+                      &price={{this.product_price}}&br={{this.product_brand}}&st={{this.product_stkqty}}&proid={{this.product_id}}&id={{this._id}}" 
+                      class="btn btn-light">Edit</a></td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
 </section>
