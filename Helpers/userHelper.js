@@ -195,6 +195,7 @@ module.exports = {
         }
       
       ]).toArray();
+      console.log(orders);
       if (orders) {
         resolve(orders);
       }

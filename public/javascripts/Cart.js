@@ -1,4 +1,5 @@
 $('#qty_loading').hide();
+let qty= 0;
 function addToCart(id, user,cart) {
 
     console.log("added to cart");
@@ -15,7 +16,10 @@ function addToCart(id, user,cart) {
 
         }
         else if (response.status) {
-            alert(`Product Add To Cart  for ${response.user}`)
+            $('#qty').html("Product added to cart");
+            setTimeout(()=>{
+                $('#qty').html(qty);
+            },1500);
         }
 
     })
@@ -24,8 +28,8 @@ function addToCart(id, user,cart) {
         url: "/getTotalProduct",
         type: 'get'
     }).done((result) => {
-
-        $('#qty').html(result.totalQty);
+        qty = result.totalQty
+        // $('#qty').html(result.totalQty);
         if(cart){
             location.replace("/cart")
         }

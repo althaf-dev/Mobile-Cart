@@ -9,7 +9,7 @@ module.exports = {
             })
         })
     },
-    updateProduct: (id, data) => {
+    updateProduct:(id, data) => {
         data.product_price = Number(data.product_price);
         let prodId = objectM.createFromHexString(id);
         return new Promise((resolve, reject) => {
@@ -46,10 +46,11 @@ module.exports = {
     },
     getProductsFromOrder: (orderId) => {
         let order_Id = objectM.createFromHexString(orderId);
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
 
-            let products = get().collection('order').aggregate([
+            let products = await get().collection('order').aggregate([
                 { $match: { _id: order_Id } },
+                {$unwind:'$products'},
                 {
                     $lookup: {
                         from: 'test',
@@ -57,10 +58,11 @@ module.exports = {
                         foreignField: "_id",
                         as: 'pro'
                     }
-                }
-
+                },
+                {$project:{"products":1,"pro":1}}
 
             ]).toArray();
+            // console.log(products);
             resolve(products);
         })
     },
@@ -68,29 +70,18 @@ module.exports = {
 
         let order_Id = objectM.createFromHexString(orderId);
         let pro_Id = objectM.createFromHexString(proId);
+        console.log(`Delivery status = ${typeof(status.delivery_status)}`);
         return new Promise(async (resolve, reject) => {
 
             await get().collection('order').updateOne(
                 { _id: order_Id, 'products.item_id': pro_Id },
                 {
-                    $set: { 'products.$.Ss': status }
+                    $set: { 'products.$.Ds': status.delivery_status,'products.$.Ss': status.Shipping_status}
                 }
-            )
+            ) 
+            console.log("done");
+            resolve("done");
         });
-        resolve("done");
-    },
-    productWrapper: (order) => {
-
-        let product_details = order[0].pro;
-        let order_details = order[0].products;
-        // console.log(product_details);
-        // console.log(order_details)
-        let result = [];
-        for (let i = 0; i < product_details.length; i++) {
-            let j = order_details.findIndex(prod =>prod.item_id.toString() == product_details[i]._id.toString())
-            console.log(j);
-            result.push({ ...product_details[i], ...order_details[j] })
-        }
-        return result;
+       
     }
 }

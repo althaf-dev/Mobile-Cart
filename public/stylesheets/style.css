@@ -98,9 +98,7 @@ nav input:focus{
   transition:all 0.2s;
   background-color:whitesmoke;
   transform:scaleY(1.05);
-  font-weight: bold;
-  
-  
+  font-weight: bold; 
 }
 .price-box:hover{
   transition: all 0.5s;
@@ -128,6 +126,11 @@ nav input:focus{
    border:none ;
    border-radius: 0;
    border-bottom: 1px solid black;
+}
+.box-hover:hover{
+
+  box-shadow: 2px 2px 20px 2px hsla(0, 3%, 7%, 0.461) !important;
+
 }
 
 .login input:focus{

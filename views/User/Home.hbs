@@ -20,7 +20,10 @@
       <div class="col-lg-2 col-md-3 col-sm-4 col-6  mt-2">
 
         <div class="card card-bg border rounded-2" style="width: 12rem; height:20rem">
-          <img src="/images/product-images/{{this._id}}.jpeg" class=" card-top-image border border-1 border-secondary  mb-1 rounded-2 anim" alt="{{this.product_id}}" height="200rem" />
+          <a href="/productsearch?product_name={{this.product_name}}">
+             <img src="/images/product-images/{{this._id}}.jpeg" class=" card-top-image border border-1 border-secondary  mb-1 rounded-2 anim" alt="{{this.product_id}}" height="200px" width="190px" />
+          </a>
+         
           <div class="card-body ps-1 pe-1 p-0">
             <div class="overflow-hidden" style="height: 2.2rem;text-overflow:clip">
                <p class="card-title" style="font-size: 0.9rem; ">{{this.product_name}}</p>

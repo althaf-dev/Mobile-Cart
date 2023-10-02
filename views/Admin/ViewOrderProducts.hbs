@@ -29,17 +29,23 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each products}}
+                {{#each order}}
                     <tr class="align-middle text-center">
                         <td>
-                            <img src="/images/product-images/{{ this._id }}.jpeg" alt="pro-image" width="100px" height="100px"></td>
-                            <td>{{ this._id }}</td>
+                            <img src="/images/product-images/{{ this.products.item_id }}.jpeg" alt="pro-image" width="100px" height="100px"></td>
+                            {{#each this.pro}}
+                            <td>{{ this.product_name }}</td>
+
                             <td>{{ this.product_price }}</td>
+                            
+
+                            <form id = {{ this._id }} onsubmit="shippingUpdate('{{this._id}}',event)">
+                            {{/each}}
+                           
                             <td>   
-                                <select selected = '{{this.Ss}}' class="border-0 bg-primary bg-gradient text-white rounded-2 p-1 text-center" 
-                                style="width:40%"
-                                onchange ="shippingUpdate('{{this._id}}',event)">
-                                    <option  selected value="" label="">{{this.Ss}}</option>
+                                <select  name = "delivery_status"  class="border-0 bg-primary bg-gradient text-white rounded-2 p-1 text-center" 
+                                style="width:40%">
+                                    <option  selected value={{this.products.Ds}} label={{this.products.Ds}}>{{this.products.Ds}}</option>
                                     <option value="Pending" label="Pending">Pending</option>
                                     <option value="Started" label="Started">Started</option>
                                     <option value="NotStarted" label="Not Started">Not Started</option>
@@ -47,8 +53,8 @@
                                 </select>
                             </td>
                             <td>
-                                <select class="border-0 bg-primary text-white rounded-2 p-1 text-center" style="width:40%">
-                                    <option  selected value="" label="">{{this.Ds}}</option>
+                                <select name = "Shipping_status" class="border-0 bg-primary text-white rounded-2 p-1 text-center" style="width:40%">
+                                   <option  selected value={{this.products.Ss}} label={{this.products.Ss}}>{{this.products.Ss}}</option>
                                     <option value="Pending" label="Pending">Pending</option>
                                     <option value="Started" label="Started">Started</option>
                                     <option value="NotStarted" label="Not Started">Not Started</option>
@@ -56,7 +62,8 @@
                                 </select>
                             </td>
                             <td>{{this.product_stkqty}}</td>
-                            <td>  <a href='/admin/update-order-products?id={{ this._id }}' class="btn btn-success">Update</a></td>
+                            <td>  <button  type = 'submit' class="btn btn-success">Update</button></td>
+                            </form>
                         </tr>
                     {{/each}}
                 </tbody>

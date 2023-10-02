@@ -72,15 +72,15 @@ router.get('/banner-upload',(req,res)=>{
 
 router.get('/view-order-products',async(req,res)=>{
   let orderId = req.query.id;
-  let order = await adminHelper.getProductsFromOrder(orderId );
-  let products = adminHelper.productWrapper(order);
-  // console.log(products);
-  res.render('Admin/ViewOrderProducts',{products,orderId})
+  let order = await adminHelper.getProductsFromOrder(orderId);
+  // console.log(order[0]);
+  res.render('Admin/ViewOrderProducts',{order:order,orderId:order[0]._id})
 })
 router.post('/update-order-products',async(req,res)=>{
 
-  console.log("admin update")
-  await adminHelper.updateOrderProductStatus(req.body.orderId,req.body.proId,req.body.Ss);
-
+  console.log("admin update");
+  const status = Object.fromEntries(new URLSearchParams(req.body.status));
+  await adminHelper.updateOrderProductStatus(req.body.orderId,req.body.proId,status);
+  res.json({status:true});
 })
 module.exports = router;
